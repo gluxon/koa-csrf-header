@@ -1,0 +1,35 @@
+{
+  "name": "koa-csrf-header",
+  "version": "1.0.0",
+  "description": "Validate CSRF tokens in request headers.",
+  "main": "index.js",
+  "author": "Brandon Cheng <brandon.cheng@protonmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "csrf": "^3.0.6"
+  },
+  "devDependencies": {
+    "crypto": "^1.0.1",
+    "koa": "^2.5.1",
+    "koa-session": "^5.8.1",
+    "standard": "^10.0.3"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gluxon/koa-csrf-header.git"
+  },
+  "keywords": [
+    "koa",
+    "csrf"
+  ],
+  "bugs": {
+    "url": "https://github.com/gluxon/koa-csrf-header/issues"
+  },
+  "homepage": "https://github.com/gluxon/koa-csrf-header",
+  "engines": {
+    "node": "~10.1.0"
+  }
+}
