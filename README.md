@@ -1,7 +1,7 @@
 # Koa CSRF Header Validation
 
-The [CSRF module provided by Koa's maintainers](#koa-csrf) doesn't support
-validating CSRF tokens as an HTTP header field. This package provides that
+~The [CSRF module provided by Koa's maintainers](#koa-csrf) doesn't support
+validating CSRF tokens as an HTTP header field.~ This package provides that
 alternative exclusively.
 
 This method requires client-side JavaScript enabled to craft the AJAX request,
