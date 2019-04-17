@@ -86,27 +86,94 @@ describe("koa-csrf-header", () => {
         assert.deepEqual(error.response.data, "Invalid CSRF Token");
       }
     });
-    it("Should accept POST request without CSRF token", async () => {
-      try {
-        const response = await axios.get("http://localhost:3333");
-        const CSRFTokenHeader = response.headers["set-cookie"][0];
-        const CSRFTokenHeaderArray = CSRFTokenHeader.split(";")[0];
-        const token = CSRFTokenHeaderArray.split("=")[1];
-        await axios.post(
-          "http://localhost:3333",
-          {},
-          {
-            headers: {
-              [CSRFTokenCookieName]: token,
-              Cookie: `${CSRFTokenCookieName}=${token};`
-            }
+    // it("Should accept POST request without CSRF token", async () => {
+    //   try {
+    //     const response = await axios.get("http://localhost:3333");
+    //     const CSRFTokenHeader = response.headers["set-cookie"][0];
+    //     const CSRFTokenHeaderArray = CSRFTokenHeader.split(";")[0];
+    //     const token = CSRFTokenHeaderArray.split("=")[1];
+    //     await axios.post(
+    //       "http://localhost:3333",
+    //       {},
+    //       {
+    //         headers: {
+    //           [CSRFTokenCookieName]: token,
+    //           Cookie: `${CSRFTokenCookieName}=${token};`
+    //         }
+    //       }
+    //     );
+    //   } catch (error) {
+    //     console.log(error.response);
+    //     // assert.deepEqual(error.response.status, 403);
+    //     // assert.deepEqual(error.response.data, "Invalid CSRF Token");
+    //   }
+    // });
+    after(() => {
+      server.close();
+    });
+  });
+  describe("CSRF defence", () => {
+    before(async () => {
+      const app = new Koa();
+      app.use(
+        csrf({
+          getToken: ctx => ctx.cookies.get("csrf-token"),
+          setToken: (token, ctx) => {
+            ctx.cookies.set("csrf-token", token, { httpOnly: false });
           }
-        );
-      } catch (error) {
-        console.log(error.response);
-        // assert.deepEqual(error.response.status, 403);
-        // assert.deepEqual(error.response.data, "Invalid CSRF Token");
-      }
+        })
+      );
+      app.use(ctx => {
+        ctx.body = "hello";
+      });
+      server = await runServer(app);
+    });
+    it("Should accept POST request when CSRF header and cookie matches", async () => {
+      const getRes = await axios.get("http://localhost:3333");
+      const CSRFTokenHeader = getRes.headers["set-cookie"][0];
+      const CSRFTokenHeaderCookie = CSRFTokenHeader.split(";")[0];
+      const token = CSRFTokenHeaderCookie.split("=")[1];
+      const postRes = await axios.post(
+        "http://localhost:3333",
+        {},
+        {
+          headers: {
+            "X-CSRF-Token": token,
+            Cookie: CSRFTokenHeaderCookie
+          }
+        }
+      );
+      assert.deepEqual(postRes.status, 200);
+    });
+    it("Should accept PATCH request when CSRF header and cookie matches", async () => {
+      const getRes = await axios.get("http://localhost:3333");
+      const CSRFTokenHeader = getRes.headers["set-cookie"][0];
+      const CSRFTokenHeaderCookie = CSRFTokenHeader.split(";")[0];
+      const token = CSRFTokenHeaderCookie.split("=")[1];
+      const postRes = await axios.patch(
+        "http://localhost:3333",
+        {},
+        {
+          headers: {
+            "X-CSRF-Token": token,
+            Cookie: CSRFTokenHeaderCookie
+          }
+        }
+      );
+      assert.deepEqual(postRes.status, 200);
+    });
+    it("Should accept DELETE request when CSRF header and cookie matches", async () => {
+      const getRes = await axios.get("http://localhost:3333");
+      const CSRFTokenHeader = getRes.headers["set-cookie"][0];
+      const CSRFTokenHeaderCookie = CSRFTokenHeader.split(";")[0];
+      const token = CSRFTokenHeaderCookie.split("=")[1];
+      const postRes = await axios.delete("http://localhost:3333", {
+        headers: {
+          "X-CSRF-Token": token,
+          Cookie: CSRFTokenHeaderCookie
+        }
+      });
+      assert.deepEqual(postRes.status, 200);
     });
     after(() => {
       server.close();
