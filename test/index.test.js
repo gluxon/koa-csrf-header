@@ -86,28 +86,6 @@ describe("koa-csrf-header", () => {
         assert.deepEqual(error.response.data, "Invalid CSRF Token");
       }
     });
-    // it("Should accept POST request without CSRF token", async () => {
-    //   try {
-    //     const response = await axios.get("http://localhost:3333");
-    //     const CSRFTokenHeader = response.headers["set-cookie"][0];
-    //     const CSRFTokenHeaderArray = CSRFTokenHeader.split(";")[0];
-    //     const token = CSRFTokenHeaderArray.split("=")[1];
-    //     await axios.post(
-    //       "http://localhost:3333",
-    //       {},
-    //       {
-    //         headers: {
-    //           [CSRFTokenCookieName]: token,
-    //           Cookie: `${CSRFTokenCookieName}=${token};`
-    //         }
-    //       }
-    //     );
-    //   } catch (error) {
-    //     console.log(error.response);
-    //     // assert.deepEqual(error.response.status, 403);
-    //     // assert.deepEqual(error.response.data, "Invalid CSRF Token");
-    //   }
-    // });
     after(() => {
       server.close();
     });
