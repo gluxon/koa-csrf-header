@@ -14,10 +14,11 @@
     "crypto": "^1.0.1",
     "koa": "^2.5.1",
     "koa-session": "^5.8.1",
+    "nyc": "^14.0.0",
     "standard": "^10.0.3"
   },
   "scripts": {
-    "test": "mocha test"
+    "test": "nyc mocha test"
   },
   "repository": {
     "type": "git",
