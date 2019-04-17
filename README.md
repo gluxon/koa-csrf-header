@@ -11,6 +11,13 @@ templates don't need to be concerned with outputting a hidden field.
 This package will be deprecated if the Koa team provided package supports
 validation in the header in the future.
 
+**Update**:
+
+The `koa-csrf` package does actually accept CSRF tokens in the HTTP header. It's
+just not documented. I recommend using the official package over this one.
+
+https://github.com/koajs/csrf/blob/d798482/src/index.js#L57
+
 ## Install
 
 ```sh
