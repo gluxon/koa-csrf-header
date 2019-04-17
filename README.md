@@ -1,11 +1,8 @@
 # Koa CSRF Header Validation
 
 [![Known Vulnerabilities](https://snyk.io/test/github/fkanout/koa-csrf-header/badge.svg)](https://snyk.io/test/github/fkanout/koa-csrf-header)
-
 [![codecov](https://codecov.io/gh/fkanout/koa-csrf-header/branch/master/graph/badge.svg)](https://codecov.io/gh/fkanout/koa-csrf-header)
-
 [![Build Status](https://travis-ci.org/fkanout/koa-csrf-header.svg?branch=master)](https://travis-ci.org/fkanout/koa-csrf-header)
-
 [![Maintainability](https://api.codeclimate.com/v1/badges/aa55921e70a9d5211815/maintainability)](https://codeclimate.com/github/fkanout/koa-csrf-header/maintainability)
 
 The [CSRF module provided by Koa's maintainers](#koa-csrf) doesn't support
