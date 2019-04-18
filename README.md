@@ -5,8 +5,8 @@
 [![Build Status](https://travis-ci.org/fkanout/koa-csrf-header.svg?branch=master)](https://travis-ci.org/fkanout/koa-csrf-header)
 [![Maintainability](https://api.codeclimate.com/v1/badges/aa55921e70a9d5211815/maintainability)](https://codeclimate.com/github/fkanout/koa-csrf-header/maintainability)
 
-The [CSRF module provided by Koa's maintainers](#koa-csrf) doesn't support
-validating CSRF tokens as an HTTP header field. This package provides that
+~The [CSRF module provided by Koa's maintainers](#koa-csrf) doesn't support
+validating CSRF tokens as an HTTP header field.~ This package provides that
 alternative exclusively.
 
 This method requires client-side JavaScript enabled to craft the AJAX request,
@@ -15,6 +15,13 @@ templates don't need to be concerned with outputting a hidden field.
 
 This package will be deprecated if the Koa team provided package supports
 validation in the header in the future.
+
+**Update**:
+
+The `koa-csrf` package does actually accept CSRF tokens in the HTTP header. It's
+just not documented. I recommend using the official package over this one.
+
+https://github.com/koajs/csrf/blob/d798482/src/index.js#L57
 
 ## Install
 
