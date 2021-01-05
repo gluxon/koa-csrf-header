@@ -9,7 +9,7 @@
     "csrf": "^3.1.0"
   },
   "devDependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "crypto": "^1.0.1",
     "koa": "^2.5.1",
     "koa-session": "^5.8.1",
